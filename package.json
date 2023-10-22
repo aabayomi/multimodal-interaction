@@ -1,0 +1,26 @@
+{
+  "name": "multimodal-interaction",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aabayomi/multimodal-interaction.git"
+  },
+  "keywords": [],
+  "author": "abayomi adekanmbi <odunayo@rocketmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aabayomi/multimodal-interaction/issues"
+  },
+  "homepage": "https://github.com/aabayomi/multimodal-interaction#readme",
+  "dependencies": {
+    "@mediapipe/holistic": "0.5.1675471629",
+    "@tensorflow/tfjs-node": "4.12.0",
+    "body-parser": "1.20.2",
+    "express": "4.18.2"
+  }
+}

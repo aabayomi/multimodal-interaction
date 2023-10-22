@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  <script type="module" src="script.js"></script>
+  <link rel="stylesheet" href="style.css">
+
+  <title>multi-modal interaction</title>
+</head>
+
+<body>
+  <section id="demos" class="invisible">
+    <div id="liveView" class="videoView">
+      <button id="webcamButton">Analyze</button>
+      <div style="position: relative;">
+        <video id="webcam" autoplay playsinline></video>
+        <canvas class="output_canvas" id="output_canvas" width="640" height="480"
+          style="position: absolute; left: 0px; top: 0px;"></canvas>
+        <p id='gesture_output' class="output">
+      </div>
+
+      <div class="text-container">
+        <div id="target-words"></div>
+      </div>
+
+      <ul class="emoji-map">
+        <li>a: 👍</li>
+        <li>b: 👎</li>
+        <li>c: ✌️</li>
+        <li>d: ☝️</li>
+        <li>e: ✊</li>
+        <li>f: 👋</li>
+        <li>backspace: 🤟 </li>
+      </ul>
+
+      <div id="spoken-word-output">Spoken Word: <span id="spoken-word-content"></span></div>
+      
+      <div class="text-container">
+       <p> Say : uppercase for Capital Letter </p> 
+      <p> Say : lowercase for Lowercase Letter</p>
+    </ul>
+
+    </div>
+   
+  </section>
+  
+
+</body>
+
+</html>
+
+
