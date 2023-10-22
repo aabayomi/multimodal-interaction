@@ -11,24 +11,34 @@ let enableWebcamButton = HTMLButtonElement;
 let webcamRunning = false;
 const videoHeight = "480px";
 const videoWidth = "640px";
+
 const gestureToLetterMap = {
-  "Closed_Fist": "e",
-  "Open_Palm": "f",
-  "Pointing_Up": "d",
-  "Thumb_Down": "b",
-  "Thumb_Up": "a",
-  "Victory": "c",
+  "Closed_Fist": { lowercase: "e", uppercase: "E" },
+  "Open_Palm": { lowercase: "f", uppercase: "F" },
+  "Pointing_Up": { lowercase: "d", uppercase: "D" },
+  "Thumb_Down": { lowercase: "b", uppercase: "B" },
+  "Thumb_Up": { lowercase: "a", uppercase: "A" },
+  "Victory": { lowercase: "c", uppercase: "C" },
   "ILoveYou": "backspace"
 };
+// const gestureToLetterMap = {
+//   "Closed_Fist": "e",
+//   "Open_Palm": "f",
+//   "Pointing_Up": "d",
+//   "Thumb_Down": "b",
+//   "Thumb_Up": "a",
+//   "Victory": "c",
+//   "ILoveYou": "backspace"
+// };
 
-const gestureToLetterMapCaps = {
-  "Closed_Fist": "E",
-  "Open_Palm": "F",
-  "Pointing_Up": "D",
-  "Thumb_Down": "B",
-  "Thumb_Up": "A",
-  "Victory": "C",
-};
+// const gestureToLetterMapCaps = {
+//   "Closed_Fist": "E",
+//   "Open_Palm": "F",
+//   "Pointing_Up": "D",
+//   "Thumb_Down": "B",
+//   "Thumb_Up": "A",
+//   "Victory": "C",
+// };
 const targetSequence = ["abcdef", "ABCDEF", "aAbBcC", "DfACeF", "BcEade", "fcABFb"]; 
 var uniqueChars = [];
 
@@ -180,24 +190,26 @@ function enableCam(event) {
       gestureOutput.style.width = videoWidth;
       const categoryName = results.gestures[0][0].categoryName;
       const mappedLetter = gestureToLetterMap[categoryName] || "Unknown Gesture";
-      const mappedLetterCaps = gestureToLetterMapCaps[categoryName] || "Unknown Gesture";
-    
-      if (mappedLetter === "backspace") {
+      // const mappedLetterCaps = gestureToLetterMapCaps[categoryName] || "Unknown Gesture";
+      const letterMapping = gestureToLetterMap[categoryName] || "Unknown Gesture";
+      
+      // console.log(mappedLetter, mappedLetterCaps);
+
+      if (letterMapping === "backspace") {
         console.log("backspace");
         uniqueChars.pop(); // Remove the last detected gesture if backspace is detected.
         console.log(uniqueChars);
-      } else if (!uniqueChars.includes(mappedLetter) && !uniqueChars.includes(mappedLetterCaps) && mappedLetter !== "Unknown Gesture" && uniqueChars.length < 6) {
+
+      } else if (typeof letterMapping === "object") {
+        const mappedLetter = spokenWord === "uppercase" ? letterMapping.uppercase : letterMapping.lowercase;
         
-        if (spokenWord === "uppercase") {
-          // mappedLetter = mappedLetter.toUpperCase();
-          console.log(spokenWord)
-          uniqueChars.push(mappedLetterCaps);
-        } else if (spokenWord === "lowercase") {
+        if (!uniqueChars.includes(mappedLetter) && mappedLetter !== "Unknown Gesture" && uniqueChars.length < 6) {
           uniqueChars.push(mappedLetter);
         }
-        console.log(uniqueChars);
       }
-    
+
+  
+  
       if (uniqueChars.length === 6) {
         let word = uniqueChars.join('');
         console.log(word);
